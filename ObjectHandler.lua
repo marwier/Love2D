@@ -9,8 +9,11 @@ function ObjectHandler:new()
 end
 
 function ObjectHandler:updateObjects(dt)
-  for _,o in ipairs(self.objectList) do
-    o:update(dt)
+  for i = table.getn(self.objectList), 1, -1 do
+    self.objectList[i]:update(dt)
+    if self.objectList[i].attributes.y > love.graphics.getHeight() then
+      self:removeObject(i)
+    end
   end
 end
 
@@ -24,8 +27,8 @@ function ObjectHandler:addObject(object)
   table.insert(self.objectList, object)
 end
 
-function ObjectHandler:removeObject(object)
-  table.remove(self.objectList, object)
+function ObjectHandler:removeObject(index)
+  table.remove(self.objectList, index)
 end
 
 return ObjectHandler

@@ -6,27 +6,28 @@ local delegate = {
 }
 
 local const = {
-  fallingSpeed = 1,
-  rectangleSize = 20,
+  fallingSpeed = 10,
+  rectangleSize = 5,
   drawMode = "fill"
 }
 
 function Square:new(x, y)
+  local square = {}
   local attributes = {}
- 
+
   attributes.x = x
   attributes.y = y
   attributes.velocity = 0
- 
+
   attributes.colors = {
     red = delegate.getColor(),
     green = delegate.getColor(),
     blue = delegate.getColor()
   }
- 
-  self.attributes = attributes
- 
-  return self
+
+  square.attributes = attributes
+  setmetatable(square, Square)
+  return square
 end
 
 function Square:draw()
