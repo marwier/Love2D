@@ -34,4 +34,8 @@ function ObjectHandler:removeObject(index)
   table.remove(self.objectList, index)
 end
 
+function ObjectHandler:removeAllObjects()
+  self.objectList = {}
+end
+
 return ObjectHandler
