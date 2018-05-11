@@ -1,8 +1,8 @@
-Square = require("Square")
-ObjectHandler = require("ObjectHandler")
+require("Singletones")
+require("Square")
 
 function love.load()
-  objectHandler = ObjectHandler:new()
+
 end
 
 function love.draw()
@@ -11,9 +11,4 @@ end
 
 function love.update(dt)
   objectHandler:updateObjects(dt)
-end
-
-function love.mousemoved(x, y)
-  local square = Square:new(x,y)
-  objectHandler:addObject(square)
 end

@@ -2,24 +2,27 @@ local ObjectHandler = {}
 ObjectHandler.__index = ObjectHandler
 
 function ObjectHandler:new()
-  return setmetatable(
+  if ObjectHandler._instance then
+    return ObjectHandler._instance
+  end
+  
+  ObjectHandler._instance = setmetatable(
     {
       objectList = {}
     }, self)
+
+  return ObjectHandler._instance
 end
 
 function ObjectHandler:updateObjects(dt)
-  for i = table.getn(self.objectList), 1, -1 do
-    self.objectList[i]:update(dt)
-    if self.objectList[i].attributes.y > love.graphics.getHeight() then
-      self:removeObject(i)
-    end
+  for i = #self.objectList, 1, -1 do
+    self.objectList[i]:update(i, dt)
   end
 end
 
 function ObjectHandler:drawObjects()
-  for _,o in ipairs(self.objectList) do
-    o:draw()
+  for i = #self.objectList, 1, -1 do
+    self.objectList[i]:draw(i)
   end
 end
 
