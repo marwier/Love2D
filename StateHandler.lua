@@ -1,9 +1,9 @@
+splashScreen = require("SplashScreen")
+menu = require("Menu")
+game = require("Game")
+
 local StateHandler = {}
 StateHandler.__index = StateHandler
-
-local const = {
-  initialState = "Menu"
-}
 
 function StateHandler:new()
   if StateHandler._instance then
@@ -14,14 +14,14 @@ function StateHandler:new()
     {
       stateList = 
       {
-        "SpashScreen",
-        "MainMenu",
-        "Game",
-        "Pause"
+        splashScreen:new(),
+        menu:new(),
+        game:new()
       }
     }, self)
 
-  StateHandler.currentState = const.initialState
+  StateHandler.currentState = self._instance.stateList[1]
+  StateHandler.currentStateName = self.currentState.Name
   
   return StateHandler._instance
 end
@@ -30,19 +30,26 @@ function StateHandler:getCurrentState()
   return self.currentState
 end
 
+function StateHandler:getCurrentStateName()
+  return self.currentStateName
+end
+
 function StateHandler:changeState(newState)
-  if self:stateExists(newState) then
-    self.currentState = newState
+  exists, index = self:stateExists(newState)
+  
+  if exists then
+    self.currentState = self.stateList[index]
+    self.currentStateName = self.stateList[index].Name
   end
 end  
 
 function StateHandler:stateExists(state)
-  for _,o in pairs(self.stateList) do
-    if o == state then
-      return true
+  for i,o in ipairs(self.stateList) do
+    if o.Name == state then
+      return true, i
     end
   end
-  return false
+  return false, nil
 end
 
 -- experimental code
@@ -53,7 +60,7 @@ end
   end
 end
 
-function love.keypressed(key)
+--[[function love.keypressed(key)
  local sh = StateHandler:new()
  
  if key == "p" then
