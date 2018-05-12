@@ -8,6 +8,7 @@ local delegate = {
 }
 
 local const = {
+  expectedState = "Game",
   fallingSpeed = 10,
   rectangleSize = 5,
   drawMode = "fill"
@@ -33,22 +34,32 @@ function Square:new(x, y)
 end
 
 function Square:draw(index)
-  love.graphics.setColor(self.attributes.colors.red, self.attributes.colors.green, self.attributes.colors.blue)
-  love.graphics.rectangle(const.drawMode, self.attributes.x, self.attributes.y, const.rectangleSize, const.rectangleSize)
+  if verifyGameState(const.expectedState) then
+    love.graphics.setColor(self.attributes.colors.red, self.attributes.colors.green, self.attributes.colors.blue)
+    love.graphics.rectangle(const.drawMode, self.attributes.x, self.attributes.y, const.rectangleSize, const.rectangleSize)
+  end
 end
 
 function Square:update(index, dt)
-  self.attributes.velocity = self.attributes.velocity + dt * const.fallingSpeed
-  self.attributes.y = self.attributes.y + self.attributes.velocity
-  
-  if self.attributes.y > love.graphics.getHeight() then
-    objectHandler:removeObject(index)
+  if verifyGameState(const.expectedState) then
+    self.attributes.velocity = self.attributes.velocity + dt * const.fallingSpeed
+    self.attributes.y = self.attributes.y + self.attributes.velocity
+    
+    if self.attributes.y > love.graphics.getHeight() then
+      objectHandler:removeObject(index)
+    end
   end
 end
 
 function love.mousemoved(x, y)
-  local square = Square:new(x,y)
-  objectHandler:addObject(square)
+  if verifyGameState(const.expectedState) then
+    local square = Square:new(x,y)
+    objectHandler:addObject(square)
+  end
+end
+
+function verifyGameState(state)
+  return stateHandler:getCurrentStateName() == state
 end
 
 return Square

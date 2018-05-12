@@ -52,8 +52,16 @@ function StateHandler:stateExists(state)
   return false, nil
 end
 
+function StateHandler:updateState(dt)
+  self:getCurrentState().update(dt)
+end
+
+function StateHandler:drawState()
+  self:getCurrentState().draw()
+end
+
 -- experimental code
---[[function love.mousepressed(x, y, button)
+function love.mousepressed(x, y, button)
   if button == 2 then
     local states = StateHandler:new()
     states:changeState("Game")
