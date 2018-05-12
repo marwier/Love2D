@@ -1,3 +1,5 @@
+require("Singletones")
+
 local Game = {}
 Game.__index = Game
 
@@ -20,7 +22,7 @@ function Game:update(dt)
 end
 
 function Game:draw()
-  love.graphics.print("Game loaded!", 10, 250)
+  
 end
 
 return Game

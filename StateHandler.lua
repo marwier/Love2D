@@ -1,7 +1,3 @@
-splashScreen = require("SplashScreen")
-menu = require("Menu")
-game = require("Game")
-
 local StateHandler = {}
 StateHandler.__index = StateHandler
 
@@ -12,29 +8,21 @@ function StateHandler:new()
   
   StateHandler._instance = setmetatable(
     {
-      stateList = 
-      {
-        splashScreen:new(),
-        menu:new(),
-        game:new()
-      }
+      stateList = {}
     }, self)
-
-  StateHandler.currentState = self._instance.stateList[1]
-  StateHandler.currentStateName = self.currentState.Name
   
   return StateHandler._instance
 end
 
-function StateHandler:getCurrentState()
+function StateHandler:addState(state)
+  table.insert(self.stateList, state)
+end
+
+function StateHandler:getState()
   return self.currentState
 end
 
-function StateHandler:getCurrentStateName()
-  return self.currentStateName
-end
-
-function StateHandler:changeState(newState)
+function StateHandler:setState(newState)
   exists, index = self:stateExists(newState)
   
   if exists then
@@ -53,31 +41,11 @@ function StateHandler:stateExists(state)
 end
 
 function StateHandler:updateState(dt)
-  self:getCurrentState().update(dt)
+  self:getState():update(dt)
 end
 
 function StateHandler:drawState()
-  self:getCurrentState().draw()
+  self:getState():draw()
 end
-
--- experimental code
-function love.mousepressed(x, y, button)
-  if button == 2 then
-    local states = StateHandler:new()
-    states:changeState("Game")
-  end
-end
-
---[[function love.keypressed(key)
- local sh = StateHandler:new()
- 
- if key == "p" then
-   if sh:getCurrentState() == "Pause" then
-     sh:changeState("Game")
-    else
-      sh:changeState("Pause")
-    end
-  end
-end]]
 
 return StateHandler

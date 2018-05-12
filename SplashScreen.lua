@@ -1,3 +1,5 @@
+require("Singletones")
+
 local SplashScreen = {}
 SplashScreen.__index = SplashScreen
 
@@ -20,7 +22,7 @@ function SplashScreen:update(dt)
 end
 
 function SplashScreen:draw()
-  love.graphics.print("Loading game", 10, 250)
+
 end
 
 return SplashScreen

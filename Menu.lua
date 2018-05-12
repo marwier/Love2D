@@ -1,3 +1,5 @@
+require("Singletones")
+
 local Menu = {}
 Menu.__index = Menu
 

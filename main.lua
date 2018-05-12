@@ -1,8 +1,15 @@
 require("Singletones")
 require("Square")
+splashScreen = require("SplashScreen")
+menu = require("Menu")
+game = require("Game")
 
 function love.load()
+  stateHandler:addState(splashScreen:new())
+  stateHandler:addState(game:new())
+  stateHandler:addState(menu:new())
   
+  stateHandler:setState("SplashScreen")
 end
 
 function love.draw()

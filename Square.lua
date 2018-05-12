@@ -58,8 +58,8 @@ function love.mousemoved(x, y)
   end
 end
 
-function verifyGameState(state)
-  return stateHandler:getCurrentStateName() == state
+function verifyGameState(stateName)
+  return stateHandler:getState().Name == stateName
 end
 
 return Square
