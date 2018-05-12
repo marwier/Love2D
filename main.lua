@@ -1,5 +1,6 @@
 require("Singletones")
 require("Square")
+
 splashScreen = require("SplashScreen")
 menu = require("Menu")
 game = require("Game")
