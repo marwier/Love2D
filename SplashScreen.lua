@@ -2,15 +2,17 @@ local SplashScreen = {}
 SplashScreen.__index = SplashScreen
 
 function SplashScreen:new()
-  return setmetatable(
+  if SplashScreen._instance then
+    return SplashScreen._instance
+  end
+  
+  SplashScreen._instance = setmetatable(
     {
       Name = "SplashScreen",
       splashScreen = {}
     }, self)
-end
 
-function SplashScreen:load()
-
+  return SplashScreen._instance
 end
 
 function SplashScreen:update(dt)
@@ -18,7 +20,7 @@ function SplashScreen:update(dt)
 end
 
 function SplashScreen:draw()
-  
+  love.graphics.print("Loading game", 10, 250)
 end
 
 return SplashScreen

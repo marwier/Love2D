@@ -2,15 +2,17 @@ local Menu = {}
 Menu.__index = Menu
 
 function Menu:new()
-  return setmetatable(
+  if Menu._instance then
+    return Menu._instance
+  end
+  
+  Menu._instance = setmetatable(
     {
       Name = "Menu",
       menu = {}
     }, self)
-end
 
-function Menu:load()
-
+  return Menu._instance
 end
 
 function Menu:update(dt)
