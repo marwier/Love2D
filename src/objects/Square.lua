@@ -1,4 +1,4 @@
-require("Singletones")
+require("src/tools/Singletones")
 
 local Square = {}
 Square.__index = Square

@@ -1,4 +1,4 @@
-require("Singletones")
+require("src/tools/Singletones")
 
 local Game = {}
 Game.__index = Game

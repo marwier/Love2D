@@ -1,9 +1,9 @@
-require("Singletones")
-require("Square")
+require("src/tools/Singletones")
+require("src/objects/Square")
 
-splashScreen = require("SplashScreen")
-menu = require("Menu")
-game = require("Game")
+splashScreen = require("src/states/SplashScreen")
+menu = require("src/states/Menu")
+game = require("src/states/Game")
 
 function love.load()
   stateHandler:addState(splashScreen:new())
