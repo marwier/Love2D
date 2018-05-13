@@ -10,15 +10,19 @@ function Game:new()
   
   Game._instance = setmetatable(
     {
-      Name = "Game",
+      name = "Game",
       game = {}
     }, self)
 
   return Game._instance
 end
 
-function Game:update(dt)
+function Game:init()
   
+end
+
+function Game:update(dt)
+
 end
 
 function Game:draw()

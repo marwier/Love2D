@@ -59,7 +59,7 @@ function love.mousemoved(x, y)
 end
 
 function verifyGameState(stateName)
-  return stateHandler:getState().Name == stateName
+  return stateHandler:getState().name == stateName
 end
 
 return Square

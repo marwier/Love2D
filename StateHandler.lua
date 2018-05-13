@@ -27,13 +27,15 @@ function StateHandler:setState(newState)
   
   if exists then
     self.currentState = self.stateList[index]
-    self.currentStateName = self.stateList[index].Name
+    self.currentStateName = self.stateList[index].name
+    
+    self:getState():init()
   end
 end  
 
 function StateHandler:stateExists(state)
   for i,o in ipairs(self.stateList) do
-    if o.Name == state then
+    if o.name == state then
       return true, i
     end
   end

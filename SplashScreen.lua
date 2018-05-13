@@ -10,15 +10,19 @@ function SplashScreen:new()
   
   SplashScreen._instance = setmetatable(
     {
-      Name = "SplashScreen",
+      name = "SplashScreen",
       splashScreen = {}
     }, self)
 
   return SplashScreen._instance
 end
 
+function SplashScreen:init()
+
+end
+
 function SplashScreen:update(dt)
-  
+
 end
 
 function SplashScreen:draw()

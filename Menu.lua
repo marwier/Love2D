@@ -10,11 +10,15 @@ function Menu:new()
   
   Menu._instance = setmetatable(
     {
-      Name = "Menu",
+      name = "Menu",
       menu = {}
     }, self)
 
   return Menu._instance
+end
+
+function Menu:init()
+
 end
 
 function Menu:update(dt)
@@ -22,7 +26,7 @@ function Menu:update(dt)
 end
 
 function Menu:draw()
-  
+
 end
 
 return Menu
